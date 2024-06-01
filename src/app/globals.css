@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+
+
+.section-choose-background {
+    background-image: url('/Images/choosebg.png');
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}
+
+.vendor-bg {
+    background-image: url('/Images/vendors.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+
+.banner-img {
+    background-position: center center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
+    width: 100%;
+    min-height: 430px;
+}
