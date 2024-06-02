@@ -2,22 +2,10 @@
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { BackgroundGradient } from '../ui/background-gradient';
-import { cn } from "@/utils/cn";
-import { Label } from "../ui/label";
-import { Input } from "../ui/input";
 import verificationimg from '../../../public/Images/verification.png'
 import OtpInput from 'react-otp-input';
 const OtpVerification = () => {
     const [otp, setOtp] = useState('');
-    const otpInputStyle = {
-        width: '2rem',
-        height: '2rem',
-        margin: '0 0.5rem',
-        fontSize: '1.5rem',
-        borderRadius: '4px',
-        border: '1px solid red',
-        textAlign: 'center',
-    };
     return (
         <BackgroundGradient className="rounded-[22px] max-w-lg  bg-white dark:bg-zinc-900 overflow-hidden">
             <div className="max-w-lg min-w-[25rem] md:min-w-[30rem] w-full mx-auto rounded-none md:rounded-2xl p-4 md:p-8 shadow-input bg-white dark:bg-black">
