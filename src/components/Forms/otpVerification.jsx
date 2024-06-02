@@ -53,5 +53,4 @@ const OtpVerification = () => {
         </BackgroundGradient>
     )
 }
-
 export default OtpVerification
