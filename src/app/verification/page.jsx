@@ -1,7 +1,7 @@
 import Webbanner from '@/components/MainComponents/Webbanner'
 import React from 'react'
 import loginimg from "../../../public/Images/login2.png"
-import OtpVerification from '@/components/Forms/OtpVerification'
+import OtpVerification from '@/components/Forms/otpVerification'
 
 const Verification = () => {
     return (
