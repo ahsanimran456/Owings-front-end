@@ -26,3 +26,40 @@
     width: 100%;
     min-height: 430px;
 }
+
+.otp-container {
+    display: flex;
+    justify-content: space-between;
+    border: none;
+}
+
+.otp-input {
+    width: 3rem !important;
+    height: 2rem;
+    margin: 0 0.5rem;
+    font-size: 1.5rem;
+    border-radius: 0;
+    border: none;
+    border-bottom: 2px solid red;
+    text-align: center;
+    outline: none;
+}
+
+.otp-input:focus {
+    border: none;
+    border-bottom: 2px solid rgb(239 68 68 / 0.5);
+    outline: none;
+}
+
+/* To remove the number input spinner */
+.otp-input[type='number']::-webkit-outer-spin-button,
+.otp-input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
