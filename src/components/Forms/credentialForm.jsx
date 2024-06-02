@@ -11,6 +11,13 @@ import loginimg from "../../../public/Images/login2.png"
 import { Checkbox } from "@mui/material";
 import Link from "next/link";
 
+// icons import 
+import { CiMail } from "react-icons/ci";
+import { RiLockPasswordLine } from "react-icons/ri";
+import { MdDriveFileRenameOutline } from "react-icons/md"
+import { IoIosPhonePortrait } from "react-icons/io";
+import { GiWorld } from "react-icons/gi";
+import { FaCity } from "react-icons/fa";
 
 function CredentailForm({ title }) {
     const [Type, setType] = useState("customer");
@@ -25,12 +32,15 @@ function CredentailForm({ title }) {
             label: "Email Address",
             placeholder: "Enter your email",
             type: "email",
+            icon: < CiMail size={20} color='#dc2626' />
         },
         {
             name: "password",
             label: "Password",
             placeholder: "Enter your password",
             type: "password",
+            icon: < RiLockPasswordLine size={20} color='#dc2626' />
+
         },
 
     ]
@@ -40,43 +50,52 @@ function CredentailForm({ title }) {
             name: "name",
             label: "Name",
             placeholder: "Enter your name",
-            type: "email",
+            type: "text",
+            icon: <MdDriveFileRenameOutline size={20} color='#dc2626' />
         },
         {
             name: "email",
             label: "Email Address",
             placeholder: "Enter your email",
             type: "email",
+            icon: < CiMail size={20} color='#dc2626' />
         },
         {
             name: "phoneNumber",
             label: "Phone Number",
             placeholder: "Enter your email",
             type: "number",
+            icon: <IoIosPhonePortrait size={20} color='#dc2626' />
         },
         {
             name: "country",
             label: "Select Country",
             placeholder: "Enter your country",
-            type: "email",
+            type: "text",
+            icon: <GiWorld size={20} color='#dc2626' />
+
         },
         {
             name: "city",
             label: "Select City",
             placeholder: "Enter your city",
-            type: "email",
+            type: "text",
+            icon: <FaCity size={20} color='#dc2626' />
+
         },
         {
             name: "password",
             label: "Password",
             placeholder: "Enter your password",
             type: "password",
+            icon: <RiLockPasswordLine size={20} color='#dc2626' />
         },
         {
             name: "confirmpassword",
             label: "Confirm Password",
             placeholder: "Enter your password",
             type: "password",
+            icon: <RiLockPasswordLine size={20} color='#dc2626' />
         },
 
     ]
@@ -121,7 +140,7 @@ function CredentailForm({ title }) {
                                             key={index}
                                         >
                                             <Label htmlFor={item.label}>{item.label}</Label>
-                                            <Input name={item.label} placeholder={item.placeholder} type={item.type} />
+                                            <Input name={item.label} placeholder={item.placeholder} type={item.type} icon={item?.icon} />
                                         </LabelInputContainer>
                                     )
                                 })
@@ -147,9 +166,11 @@ function CredentailForm({ title }) {
                                         </span>
                                     </div>
                                     <div>
-                                        <span className="text-sm text-[#737272] cursor-pointer">
-                                            Forgot Password?
-                                        </span>
+                                        <Link href={'/login/forgotpassword'}>
+                                            <span className="text-sm text-[#737272] cursor-pointer">
+                                                Forgot Password?
+                                            </span>
+                                        </Link>
                                     </div>
                                 </div>
                                 <button
@@ -184,12 +205,14 @@ function CredentailForm({ title }) {
                                         </span>
                                     </div>
                                 </div>
-                                <button
-                                    className="bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br         relative group/btn  dark:from-zinc-900 dark:to-zinc-900 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
-                                    type="submit"
-                                >
-                                    Sign Up
-                                </button>
+                                <Link href={'/verification'}>
+                                    <button
+                                        className="bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br         relative group/btn  dark:from-zinc-900 dark:to-zinc-900 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
+                                        type="submit"
+                                    >
+                                        Sign Up
+                                    </button>
+                                </Link>
                                 <div className="flex justify-center mt-5">
                                     <Link href="login">
                                         <span className="text-sm  text-[#737272] cursor-pointer">Already a Member? <span className="text-sm  text-[#dc2626]">Login</span></span>
