@@ -48,8 +48,8 @@ function CredentailForm({ title }) {
     const SignupFieldList = [
         {
             name: "name",
-            label: "Name",
-            placeholder: "Enter your name",
+            label: "Business Name",
+            placeholder: "Enter your business name",
             type: "text",
             icon: <MdDriveFileRenameOutline size={20} color='#dc2626' />
         },
