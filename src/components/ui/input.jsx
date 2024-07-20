@@ -4,7 +4,7 @@ import { cn } from "@/utils/cn";
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
 
 
-const Input = React.forwardRef(({ className, type, icon, ...props }, ref) => {
+const Input = React.forwardRef(({ className, type, icon, onChange, ...props }, ref) => {
     const radius = 100; // change this to increase the radius of the hover effect
     const [visible, setVisible] = React.useState(false);
 
@@ -89,6 +89,7 @@ const Input = React.forwardRef(({ className, type, icon, ...props }, ref) => {
                     )}
                     ref={ref}
                     {...props}
+                    onChange={onChange}
                 />
                 {icon && (
                     <span className="absolute right-3">
