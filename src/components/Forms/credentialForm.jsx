@@ -27,21 +27,32 @@ function CredentailForm({ title }) {
 
     const [Type, setType] = useState("customer");
     const [images, setImages] = useState([]);
-    const [FormData, setFormData] = useState({});
+    const [FormValue, setFormValue] = useState({});
 
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...FormData, [name]: value });
+        setFormValue({ ...FormValue, [name]: value });
     };
     // useEffect(async () => {
     //     const { data, error } = await getCountries()
     //     console.log(data);
     // }, []);
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(FormData, "Form submitted");
+        console.log(FormValue, "Form submitted");
+
+        const formDataToSend = new FormData();
+        Object.keys(FormValue).forEach((key) => {
+            formDataToSend.append(key, FormValue[key]);
+        });
+
+        images.forEach((image, index) => {
+            formDataToSend.append(`image${index + 1}`, image);
+        });
+        // const { data, error } = await HandleLoginSignUp(formDataToSend);
+        console.log([...formDataToSend.entries()]);
     };
 
 
@@ -52,6 +63,14 @@ function CredentailForm({ title }) {
     };
 
 
+    const handleChangeType = (type) => {
+        setType(type);
+        setFormValue({})
+
+    }
+
+
+    // options fields 
 
     const options = [
         { value: 'Pakistan', label: 'Pakistan' },
@@ -218,7 +237,7 @@ function CredentailForm({ title }) {
                             bg-gradient-to-r rounded-2xl relative group/btn w-full h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset]
                         `}
                             type="button"
-                            onClick={(e) => setType("customer")}
+                            onClick={() => handleChangeType("customer")}
                         >
                             Customer
                         </button>
@@ -228,7 +247,7 @@ function CredentailForm({ title }) {
                             bg-gradient-to-r rounded-2xl relative group/btn w-full h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset]
                         `}
                             type="button"
-                            onClick={(e) => setType("merchant")}
+                            onClick={() => handleChangeType("merchant")}
                         >
                             Merchant
                         </button>
