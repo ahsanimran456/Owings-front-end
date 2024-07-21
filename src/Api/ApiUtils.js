@@ -89,3 +89,18 @@ export const getCountries = async () => {
     return { data: null, error: error?.response?.data };
   }
 };
+
+
+
+
+
+// Handle user 
+export const HandleLoginSignUp = async (formData) => {
+  try {
+    const data = await post("api/get-countries", formData);
+    return { data, error: null };
+  } catch (error) {
+    console.error("Error in Login SignUp :", error);
+    return { data: null, error: error?.response?.data };
+  }
+};
