@@ -47,12 +47,12 @@ function CredentailForm({ title }) {
         Object.keys(FormValue).forEach((key) => {
             formDataToSend.append(key, FormValue[key]);
         });
-
+        formDataToSend.append("role_id", Type === "customer" ? 3 : 2);
         images.forEach((image, index) => {
             formDataToSend.append(`image${index + 1}`, image);
         });
-        // const { data, error } = await HandleLoginSignUp(formDataToSend);
-        console.log([...formDataToSend.entries()]);
+        const { data, error } = await HandleLoginSignUp(formDataToSend);
+        // console.log([...formDataToSend.entries()]);
     };
 
 
@@ -99,7 +99,7 @@ function CredentailForm({ title }) {
 
     const SignupFieldList = [
         {
-            name: "name",
+            name: "business_name",
             label: "Business Name",
             placeholder: "Business name",
             type: "text",
@@ -113,9 +113,9 @@ function CredentailForm({ title }) {
             icon: < CiMail size={20} color='#dc2626' />
         },
         {
-            name: "phoneNumber",
+            name: "phone_number",
             label: "Phone Number",
-            placeholder: "Enter your email",
+            placeholder: "Enter your number",
             type: "number",
             icon: <IoIosPhonePortrait size={20} color='#dc2626' />
         },
@@ -127,7 +127,7 @@ function CredentailForm({ title }) {
             icon: <FaGetPocket size={20} color='#dc2626' />
         },
         {
-            name: "pocCell",
+            name: "poc_cell",
             label: "POC Cell No",
             placeholder: "POC Cell No",
             type: "number",
@@ -158,7 +158,7 @@ function CredentailForm({ title }) {
             icon: <RiLockPasswordLine size={20} color='#dc2626' />
         },
         {
-            name: "confirmpassword",
+            name: "password_confirmation",
             label: "Confirm Password",
             placeholder: "Enter your password",
             type: "password",
