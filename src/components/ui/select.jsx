@@ -3,7 +3,7 @@ import { cn } from "@/utils/cn";
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
 import ReactSelect from 'react-select'; // Renamed to avoid naming conflict
 
-const CustomSelect = React.forwardRef(({ className, placeholder, options, icon, ...props }, ref) => {
+const CustomSelect = React.forwardRef(({ className, placeholder, options, icon, onChange }, ref) => {
     const radius = 100; // change this to increase the radius of the hover effect
     const [visible, setVisible] = React.useState(false);
 
@@ -75,7 +75,7 @@ const CustomSelect = React.forwardRef(({ className, placeholder, options, icon, 
                     )}
                     ref={ref}
                     // value={selectedOption}
-                    // onChange={handleChange}
+                    onChange={onChange}
                     options={options}
                     placeholder={placeholder}
                     styles={customStyles} // Apply custom styles
