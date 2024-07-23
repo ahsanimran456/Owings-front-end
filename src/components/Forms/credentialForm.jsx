@@ -34,6 +34,18 @@ function CredentailForm({ title }) {
         const { name, value } = e.target;
         setFormValue({ ...FormValue, [name]: value });
     };
+
+
+    const handleSelectChange = (e) => {
+        console.log(e);
+        const { name, value } = e;
+        setFormValue({ ...FormValue, [name]: value });
+    }
+
+    useEffect(() => {
+        console.log(FormValue,"cahnged");
+    }, [FormValue]);
+
     // useEffect(async () => {
     //     const { data, error } = await getCountries()
     //     console.log(data);
@@ -73,9 +85,9 @@ function CredentailForm({ title }) {
     // options fields 
 
     const options = [
-        { value: 'Pakistan', label: 'Pakistan' },
-        { value: 'India', label: 'India' },
-        { value: 'Finland', label: 'Finland' }
+        { value: 'Pakistan', label: 'Pakistan',name:"country" },
+        { value: 'India', label: 'India',name:"country"  },
+        { value: 'Finland', label: 'Finland', name:"country" }
     ];
 
     const LoginFieldList = [
@@ -263,7 +275,7 @@ function CredentailForm({ title }) {
                                                 key={index}
                                             >
                                                 <Label htmlFor={item.label}>{item.label}</Label>
-                                                <Input name={item.label} placeholder={item.placeholder} type={item.type} icon={item?.icon} onChange={handleInputChange} />
+                                                <Input name={item.name} placeholder={item.placeholder} type={item.type} icon={item?.icon} onChange={handleInputChange} />
                                             </LabelInputContainer>
                                             :
                                             <LabelInputContainer
@@ -271,7 +283,7 @@ function CredentailForm({ title }) {
                                                 key={index}
                                             >
                                                 <Label htmlFor={item.label}>{item.label}</Label>
-                                                <CustomSelect placeholder={item?.placeholder} options={item?.options} icon={item?.icon} />
+                                                <CustomSelect placeholder={item?.placeholder} options={item?.options} icon={item?.icon} onChange={handleSelectChange} />
                                             </LabelInputContainer>
                                     )
                                 })
