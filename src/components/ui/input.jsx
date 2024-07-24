@@ -4,7 +4,8 @@ import { cn } from "@/utils/cn";
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
 
 
-const Input = React.forwardRef(({ className, type, icon, onChange, ...props }, ref) => {
+const Input = React.forwardRef(({ className, type, icon, onChange, value, name, placeholder }, ref) => {
+
     const radius = 100; // change this to increase the radius of the hover effect
     const [visible, setVisible] = React.useState(false);
 
@@ -34,45 +35,6 @@ const Input = React.forwardRef(({ className, type, icon, onChange, ...props }, r
             onMouseLeave={() => setVisible(false)}
             className="p-[2px] rounded-lg transition duration-300 group/input"
         >
-            {/* <input
-                    type={type}
-                    className={cn(
-                        `flex h-10 w-full border-none bg-gray-50 dark:bg-zinc-800 text-black dark:text-white shadow-input rounded-md px-3 py-2 text-sm  file:border-0 file:bg-transparent 
-              file:text-sm file:font-medium placeholder:text-neutral-400 dark:placeholder-text-neutral-600 
-              focus-visible:outline-none focus-visible:ring-[2px]  focus-visible:ring-neutral-400 dark:focus-visible:ring-neutral-600
-               disabled:cursor-not-allowed disabled:opacity-50
-               dark:shadow-[0px_0px_1px_1px_var(--neutral-700)]
-               group-hover/input:shadow-none transition duration-400
-               `,
-                        className
-                    )}
-                    ref={ref}
-                    {...props}
-                /> */}
-
-
-            {/* <div className="flex items-center h-10 w-full border-none bg-gray-50 dark:bg-zinc-800 text-black dark:text-white shadow-input rounded-md px-3 py-2 text-sm file:border-0 file:bg-transparent 
-                    file:text-sm file:font-medium placeholder:text-neutral-400 dark:placeholder-text-neutral-600 
-                    focus-visible:outline-none focus-visible:ring-[2px] focus-visible:ring-neutral-400 dark:focus-visible:ring-neutral-600
-                    disabled:cursor-not-allowed disabled:opacity-50
-                    dark:shadow-[0px_0px_1px_1px_var(--neutral-700)]
-                    group-hover/input:shadow-none transition duration-400">
-                <input
-                    type={type}
-                    className={cn(
-                        `flex-1 bg-transparent border-none outline-none`,
-                        className
-                    )}
-                    ref={ref}
-                    {...props}
-                />
-                {icon && (
-                    <span className="ml-2">
-                        {icon}
-                    </span>
-                )}
-            </div> */}
-
 
             {/* for 2 icon  */}
             <div className="relative flex items-center">
@@ -88,8 +50,10 @@ const Input = React.forwardRef(({ className, type, icon, onChange, ...props }, r
                         className
                     )}
                     ref={ref}
-                    {...props}
                     onChange={onChange}
+                    name={name}
+                    placeholder={placeholder}
+                    value={value && value }
                 />
                 {icon && (
                     <span className="absolute right-3">

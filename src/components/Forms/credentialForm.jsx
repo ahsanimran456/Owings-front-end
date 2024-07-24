@@ -20,7 +20,7 @@ import { GiWorld } from "react-icons/gi";
 import { FaCity } from "react-icons/fa";
 import { CustomSelect } from "../ui/select";
 import { FaGetPocket } from "react-icons/fa6";
-import { getCountries } from "@/Api/ApiUtils";
+import { getCountries, HandleLoginSignUp } from "@/Api/ApiUtils";
 
 
 function CredentailForm({ title }) {
@@ -42,9 +42,9 @@ function CredentailForm({ title }) {
         setFormValue({ ...FormValue, [name]: value });
     }
 
-    useEffect(() => {
-        console.log(FormValue,"cahnged");
-    }, [FormValue]);
+    // useEffect(() => {
+    //     console.log(FormValue, "cahnged");
+    // }, [FormValue]);
 
     // useEffect(async () => {
     //     const { data, error } = await getCountries()
@@ -54,7 +54,14 @@ function CredentailForm({ title }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(FormValue, "Form submitted");
+        const requiredFields = title === "login" ? LoginFieldList : (Type === "customer" ? SignupFieldListForCustomer : SignupFieldList);
+        const missingFields = requiredFields.filter(field => !FormValue[field.name]);
 
+        if (missingFields.length > 0) {
+            const missingFieldNames = missingFields.map(field => field.label).join(', ');
+            alert(`Please fill in the following fields: ${missingFieldNames}`);
+            return;
+        }
         const formDataToSend = new FormData();
         Object.keys(FormValue).forEach((key) => {
             formDataToSend.append(key, FormValue[key]);
@@ -78,16 +85,16 @@ function CredentailForm({ title }) {
     const handleChangeType = (type) => {
         setType(type);
         setFormValue({})
-
+        setImages([]);
     }
 
 
     // options fields 
 
     const options = [
-        { value: 'Pakistan', label: 'Pakistan',name:"country" },
-        { value: 'India', label: 'India',name:"country"  },
-        { value: 'Finland', label: 'Finland', name:"country" }
+        { value: 'Pakistan', label: 'Pakistan', name: "country" },
+        { value: 'India', label: 'India', name: "country" },
+        { value: 'Finland', label: 'Finland', name: "country" }
     ];
 
     const LoginFieldList = [
@@ -147,7 +154,7 @@ function CredentailForm({ title }) {
         },
         {
             name: "country",
-            label: "Select Country",
+            label: "Country",
             placeholder: "Enter your country",
             type: "select",
             options: options,
@@ -155,7 +162,7 @@ function CredentailForm({ title }) {
         },
         {
             name: "city",
-            label: "Select City",
+            label: "City",
             placeholder: "Enter your city",
             type: "select",
             options: options,
@@ -275,7 +282,14 @@ function CredentailForm({ title }) {
                                                 key={index}
                                             >
                                                 <Label htmlFor={item.label}>{item.label}</Label>
-                                                <Input name={item.name} placeholder={item.placeholder} type={item.type} icon={item?.icon} onChange={handleInputChange} />
+                                                <Input
+                                                    name={item.name}
+                                                    placeholder={item.placeholder}
+                                                    type={item.type}
+                                                    icon={item?.icon}
+                                                    onChange={handleInputChange}
+                                                    value={FormValue[item.name] ? FormValue[item.name] : ""}
+                                                />
                                             </LabelInputContainer>
                                             :
                                             <LabelInputContainer
