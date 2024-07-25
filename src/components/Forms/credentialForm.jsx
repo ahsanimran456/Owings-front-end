@@ -21,6 +21,8 @@ import { FaCity } from "react-icons/fa";
 import { CustomSelect } from "../ui/select";
 import { FaGetPocket } from "react-icons/fa6";
 import { getCountries, HandleLoginSignUp } from "@/Api/ApiUtils";
+import toast from "react-hot-toast";
+import validateField from "../Alerts/SingleFieldAlert";
 
 
 function CredentailForm({ title }) {
@@ -28,7 +30,6 @@ function CredentailForm({ title }) {
     const [Type, setType] = useState("customer");
     const [images, setImages] = useState([]);
     const [FormValue, setFormValue] = useState({});
-
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -54,14 +55,35 @@ function CredentailForm({ title }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(FormValue, "Form submitted");
+        // const requiredFields = title === "login" ? LoginFieldList : (Type === "customer" ? SignupFieldListForCustomer : SignupFieldList);
+        // const missingFields = requiredFields.filter(field => !FormValue[field.name]);
+
+        // if (missingFields.length > 0) {
+        //     const missingFieldNames = missingFields.map(field => field.label).join(', ');
+        //     toast.error(`Please fill in the following fields: ${missingFieldNames}`);
+        //     return;
+        // }
+
+        // Check all fields first
         const requiredFields = title === "login" ? LoginFieldList : (Type === "customer" ? SignupFieldListForCustomer : SignupFieldList);
         const missingFields = requiredFields.filter(field => !FormValue[field.name]);
-
         if (missingFields.length > 0) {
             const missingFieldNames = missingFields.map(field => field.label).join(', ');
-            alert(`Please fill in the following fields: ${missingFieldNames}`);
+            toast.error(`Please fill in the following fields: ${missingFieldNames}`);
             return;
         }
+        requiredFields.forEach(field => {
+            validateField(field, FormValue[field.name]);
+        });
+        
+        // if (missingFields.length > 0) {
+        // if (!allFieldsPresent) {
+        //     requiredFields.forEach(field => {
+        //         validateField(field, FormValue[field.name]);
+        //     });
+        //     return;
+        // }
+
         const formDataToSend = new FormData();
         Object.keys(FormValue).forEach((key) => {
             formDataToSend.append(key, FormValue[key]);
@@ -95,6 +117,11 @@ function CredentailForm({ title }) {
         { value: 'Pakistan', label: 'Pakistan', name: "country" },
         { value: 'India', label: 'India', name: "country" },
         { value: 'Finland', label: 'Finland', name: "country" }
+    ];
+    const options2 = [
+        { value: 'Pakistan', label: 'Pakistan', name: "city" },
+        { value: 'India', label: 'India', name: "city" },
+        { value: 'Finland', label: 'Finland', name: "city" }
     ];
 
     const LoginFieldList = [
@@ -165,7 +192,7 @@ function CredentailForm({ title }) {
             label: "City",
             placeholder: "Enter your city",
             type: "select",
-            options: options,
+            options: options2,
             icon: <FaCity size={20} color='#dc2626' />
 
         },
@@ -437,6 +464,7 @@ function CredentailForm({ title }) {
                     </form>
                 </div>
             </BackgroundGradient>
+
         </div>
     );
 }
