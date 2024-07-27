@@ -68,6 +68,17 @@ const validateField = (field, value) => {
         return false;
     };
 
+    const verifyOTP = (value, name) => {
+        const otpRegex = /^\d{6}$/;
+        if (!otpRegex.test(value)) {
+            toast.error('Please ensure your OTP is exactly 6 digits long.', {
+                position: "top-right"
+            });
+            return true; // Indicate that the OTP is invalid
+        }
+        return false;
+    };
+
     switch (field.name) {
         case "business_name":
             return verifyName(value, field.label);
@@ -89,6 +100,8 @@ const validateField = (field, value) => {
             return verifyPassword(value, field.label);
         case "password_confirmation":
             return verifyPassword(value, field.label);
+        case "otpCode":
+            return verifyOTP(value, field.label);
         default:
             return false;
     }

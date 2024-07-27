@@ -1,5 +1,6 @@
 "use client";
 import React, { useEffect, useState } from "react";
+import { useRouter } from 'next/navigation'
 import { BackgroundGradient } from "../ui/background-gradient";
 import { Label } from "../ui/label";
 import { Input } from "../ui/input";
@@ -26,7 +27,7 @@ import validateField from "../Alerts/SingleFieldAlert";
 
 
 function CredentailForm({ title }) {
-
+    const router = useRouter();
     const [Type, setType] = useState("customer");
     const [images, setImages] = useState([]);
     const [FormValue, setFormValue] = useState({});
@@ -36,16 +37,12 @@ function CredentailForm({ title }) {
         setFormValue({ ...FormValue, [name]: value });
     };
 
-
     const handleSelectChange = (e) => {
         console.log(e);
         const { name, value } = e;
         setFormValue({ ...FormValue, [name]: value });
     }
 
-    // useEffect(() => {
-    //     console.log(FormValue, "cahnged");
-    // }, [FormValue]);
 
     // useEffect(async () => {
     //     const { data, error } = await getCountries()
@@ -53,17 +50,9 @@ function CredentailForm({ title }) {
     // }, []);
 
     const handleSubmit = async (e) => {
+
         e.preventDefault();
         console.log(FormValue, "Form submitted");
-        // const requiredFields = title === "login" ? LoginFieldList : (Type === "customer" ? SignupFieldListForCustomer : SignupFieldList);
-        // const missingFields = requiredFields.filter(field => !FormValue[field.name]);
-
-        // if (missingFields.length > 0) {
-        //     const missingFieldNames = missingFields.map(field => field.label).join(', ');
-        //     toast.error(`Please fill in the following fields: ${missingFieldNames}`);
-        //     return;
-        // }
-
         // Check all fields first
         const requiredFields = title === "login" ? LoginFieldList : (Type === "customer" ? SignupFieldListForCustomer : SignupFieldList);
         const missingFields = requiredFields.filter(field => !FormValue[field.name]);
@@ -74,7 +63,6 @@ function CredentailForm({ title }) {
             });
             return;
         }
-
         let isValid = true;
         for (const field of requiredFields) {
             // Ensure FormValue[field.name] returns a value
@@ -91,8 +79,6 @@ function CredentailForm({ title }) {
                 break;
             }
         }
-
-
         // const formDataToSend = new FormData();
         // Object.keys(FormValue).forEach((key) => {
         //     formDataToSend.append(key, FormValue[key]);
@@ -103,6 +89,11 @@ function CredentailForm({ title }) {
         // });
         // const { data, error } = await HandleLoginSignUp(formDataToSend);
         // console.log([...formDataToSend.entries()]);
+        localStorage.setItem("email", FormValue["email"])
+        console.log(FormValue["email"]);
+        router.push('/verification');
+
+
     };
 
 

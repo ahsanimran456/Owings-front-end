@@ -104,3 +104,49 @@ export const HandleLoginSignUp = async (formData) => {
     return { data: null, error: error?.response?.data };
   }
 };
+
+
+// Handle ResendOTP 
+export const ResendOTP = async (formData) => {
+  try {
+    const data = await post("api/resend-otp", formData);
+    return { data, error: null };
+  } catch (error) {
+    // console.error("Error in resend otp :", error);
+    return { data: null, error: error?.message };
+  }
+};
+
+// Handle HandleConfirmOPT 
+export const HandleConfirmOPT = async (formData) => {
+  try {
+    const data = await post("api/verify-otp", formData);
+    return { data, error: null };
+  } catch (error) {
+    // console.error("Error in resend otp :", error);
+    return { data: null, error: error?.message };
+  }
+};
+
+
+// Handle HandleForgetPassword 
+export const HandleForgetPassword = async (formData) => {
+  try {
+    const data = await post("api/forgot-password", formData);
+    return { data, error: null };
+  } catch (error) {
+    // console.error("Error in resend otp :", error);
+    return { data: null, error: error?.message };
+  }
+};
+
+
+export const HandleSetPassword = async (formData) => {
+  try {
+    const data = await post("api/reset-password", formData);
+    return { data, error: null };
+  } catch (error) {
+    // console.error("Error in resend otp :", error);
+    return { data: null, error: error?.message };
+  }
+};
