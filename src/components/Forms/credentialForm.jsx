@@ -69,30 +69,39 @@ function CredentailForm({ title }) {
         const missingFields = requiredFields.filter(field => !FormValue[field.name]);
         if (missingFields.length > 0) {
             const missingFieldNames = missingFields.map(field => field.label).join(', ');
-            toast.error(`Please fill in the following fields: ${missingFieldNames}`);
+            toast(`Please fill in the following fields: ${missingFieldNames}`, {
+                position: "top-right"
+            });
             return;
         }
-        requiredFields.forEach(field => {
-            validateField(field, FormValue[field.name]);
-        });
-        
-        // if (missingFields.length > 0) {
-        // if (!allFieldsPresent) {
-        //     requiredFields.forEach(field => {
-        //         validateField(field, FormValue[field.name]);
-        //     });
-        //     return;
-        // }
 
-        const formDataToSend = new FormData();
-        Object.keys(FormValue).forEach((key) => {
-            formDataToSend.append(key, FormValue[key]);
-        });
-        formDataToSend.append("role_id", Type === "customer" ? 3 : 2);
-        images.forEach((image, index) => {
-            formDataToSend.append(`image${index + 1}`, image);
-        });
-        const { data, error } = await HandleLoginSignUp(formDataToSend);
+        let isValid = true;
+        for (const field of requiredFields) {
+            // Ensure FormValue[field.name] returns a value
+            const value = FormValue[field.name];
+
+            // Check if value is defined
+            if (value === undefined || value === null || value === "") {
+                console.error(`Value for field ${field.name} is not defined.`);
+                continue; // Skip to the next iteration if value is not defined
+            }
+            // Validate the field and stop the loop on failure
+            if (validateField(field, value)) {
+                isValid = false;
+                break;
+            }
+        }
+
+
+        // const formDataToSend = new FormData();
+        // Object.keys(FormValue).forEach((key) => {
+        //     formDataToSend.append(key, FormValue[key]);
+        // });
+        // formDataToSend.append("role_id", Type === "customer" ? 3 : 2);
+        // images.forEach((image, index) => {
+        //     formDataToSend.append(`image${index + 1}`, image);
+        // });
+        // const { data, error } = await HandleLoginSignUp(formDataToSend);
         // console.log([...formDataToSend.entries()]);
     };
 
@@ -229,7 +238,7 @@ function CredentailForm({ title }) {
             icon: < CiMail size={20} color='#dc2626' />
         },
         {
-            name: "phoneNumber",
+            name: "phone_number",
             label: "Phone Number",
             placeholder: "Enter your email",
             type: "number",
@@ -237,7 +246,7 @@ function CredentailForm({ title }) {
         },
         {
             name: "country",
-            label: "Select Country",
+            label: "Country",
             placeholder: "Enter your country",
             type: "select",
             options: options,
@@ -245,10 +254,10 @@ function CredentailForm({ title }) {
         },
         {
             name: "city",
-            label: "Select City",
+            label: "City",
             placeholder: "Enter your city",
             type: "select",
-            options: options,
+            options: options2,
             icon: <FaCity size={20} color='#dc2626' />
         },
         {
@@ -259,7 +268,7 @@ function CredentailForm({ title }) {
             icon: <RiLockPasswordLine size={20} color='#dc2626' />
         },
         {
-            name: "confirmpassword",
+            name: "password_confirmation",
             label: "Confirm Password",
             placeholder: "Enter your password",
             type: "password",
