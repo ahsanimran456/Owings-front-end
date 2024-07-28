@@ -1,8 +1,8 @@
 import { toast } from 'react-hot-toast';
 
 const validateField = (field, value) => {
-    console.log(field, "fleid");
-    console.log(value, "value");
+    // console.log(field, "fleid");
+    // console.log(value, "value");
 
     const verifyName = (value, name) => {
         if (!value || value.length < 3) {

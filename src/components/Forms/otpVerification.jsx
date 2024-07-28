@@ -25,7 +25,6 @@ const OtpVerification = () => {
     const ConfirmOTP = (e) => {
         e.preventDefault();
         setISsubmited(true)
-        console.log(otp.length, "asds");
         if (otp?.length == 6) {
             const userEmail = localStorage.getItem('email');
             const formDataToSend = new FormData();
