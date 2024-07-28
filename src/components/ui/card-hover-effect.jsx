@@ -12,7 +12,7 @@ export const HoverEffect = ({ items, className }) => {
         <Link
           href={item?.link}
           key={item?.link}
-          className="relative group block p-2 h-full w-full"
+          className="relative group block p-2 h-full w-full outline-none"
           onMouseEnter={() => setHoveredIndex(idx)}
           onMouseLeave={() => setHoveredIndex(null)}
         >
@@ -47,7 +47,7 @@ export const Card = ({ className, children }) => {
   return (
     <div
       className={cn(
-        "rounded-2xl h-full w-full p-4 overflow-hidden bg-black border border-transparent dark:border-white/[0.2] group-hover:border-slate-700 relative z-20",
+        "rounded-2xl h-full w-full p-4 overflow-hidden bg-[#fafafa] border-slate-500  border border-transparent dark:border-white/[0.2] hover:border-slate-200 relative z-20 category-boxshadow-hover shadow-2xl",
         className
       )}
     >
@@ -60,7 +60,7 @@ export const Card = ({ className, children }) => {
 
 export const CardTitle = ({ className, children }) => {
   return (
-    <h4 className={cn("text-zinc-100 font-bold tracking-wide mt-4", className)}>
+    <h4 className={cn("text-zinc-600 font-bold tracking-wide mt-4", className)}>
       {children}
     </h4>
   );
@@ -68,7 +68,7 @@ export const CardTitle = ({ className, children }) => {
 
 export const CardDescription = ({ className, children }) => {
   return (
-    <p className={cn("mt-8 text-zinc-400 tracking-wide leading-relaxed text-sm", className)}>
+    <p className={cn("mt-8 text-zinc-500 tracking-wide leading-relaxed text-sm", className)}>
       {children}
     </p>
   );

@@ -21,7 +21,7 @@ import { GiWorld } from "react-icons/gi";
 import { FaCity } from "react-icons/fa";
 import { CustomSelect } from "../ui/select";
 import { FaGetPocket } from "react-icons/fa6";
-import { getCountries, HandleLoginSignUp } from "@/Api/ApiUtils";
+import { getCities, getCountries, HandleLoginSignUp } from "@/Api/ApiUtils";
 import toast from "react-hot-toast";
 import validateField from "../Alerts/SingleFieldAlert";
 
@@ -31,29 +31,61 @@ function CredentailForm({ title }) {
     const [Type, setType] = useState("customer");
     const [images, setImages] = useState([]);
     const [FormValue, setFormValue] = useState({});
+    const [Countries, setCountries] = useState([]);
+    const [Cities, setCities] = useState([]);
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
         setFormValue({ ...FormValue, [name]: value });
     };
 
-    const handleSelectChange = (e) => {
-        console.log(e);
-        const { name, value } = e;
-        setFormValue({ ...FormValue, [name]: value });
+    const handleSelectChange = async (e) => {
+        const { name, value, id } = e;
+        if (name === "country") {
+            try {
+                const { data, error } = await getCities(id);
+                if (error) {
+                    console.error('Error fetching Cities:', error);
+                    return;
+                }
+                const transformedcities = data?.data.map(city => ({
+                    value: city?.city,
+                    label: city?.city,
+                    name: "city",
+                    id: city?.id
+                })) || [];
+                setCities(transformedcities);
+            } catch (err) {
+                console.error('Unexpected error:', err);
+            }
+        }
+        setFormValue({ ...FormValue, [name]: id });
     }
 
-
-    // useEffect(async () => {
-    //     const { data, error } = await getCountries()
-    //     console.log(data);
-    // }, []);
+    const fetchCountries = async () => {
+        try {
+            const { data, error } = await getCountries();
+            if (error) {
+                console.error('Error fetching countries:', error);
+                return;
+            }
+            const transformedCountries = data?.data.map(country => ({
+                value: country?.name,
+                label: country?.name,
+                name: "country",
+                id: country?.id
+            })) || [];
+            setCountries(transformedCountries);
+        } catch (err) {
+            console.error('Unexpected error:', err);
+        }
+    }
+    useEffect(() => {
+        fetchCountries();
+    }, []);
 
     const handleSubmit = async (e) => {
-
         e.preventDefault();
-        console.log(FormValue, "Form submitted");
-        // Check all fields first
         const requiredFields = title === "login" ? LoginFieldList : (Type === "customer" ? SignupFieldListForCustomer : SignupFieldList);
         const missingFields = requiredFields.filter(field => !FormValue[field.name]);
         if (missingFields.length > 0) {
@@ -65,44 +97,73 @@ function CredentailForm({ title }) {
         }
         let isValid = true;
         for (const field of requiredFields) {
-            // Ensure FormValue[field.name] returns a value
-            const value = FormValue[field.name];
-
-            // Check if value is defined
-            if (value === undefined || value === null || value === "") {
-                console.error(`Value for field ${field.name} is not defined.`);
-                continue; // Skip to the next iteration if value is not defined
-            }
-            // Validate the field and stop the loop on failure
-            if (validateField(field, value)) {
-                isValid = false;
-                break;
+            const value = FormValue[field?.name];
+            if (value !== undefined || value !== null || value !== "") {
+                if (validateField(field, value)) {
+                    isValid = false;
+                    return;
+                }
             }
         }
-        // const formDataToSend = new FormData();
-        // Object.keys(FormValue).forEach((key) => {
-        //     formDataToSend.append(key, FormValue[key]);
-        // });
-        // formDataToSend.append("role_id", Type === "customer" ? 3 : 2);
-        // images.forEach((image, index) => {
-        //     formDataToSend.append(`image${index + 1}`, image);
-        // });
-        // const { data, error } = await HandleLoginSignUp(formDataToSend);
-        // console.log([...formDataToSend.entries()]);
-        localStorage.setItem("email", FormValue["email"])
-        console.log(FormValue["email"]);
-        router.push('/verification');
+        if ((title === "signup") && (FormValue['password_confirmation'] != FormValue['password'])) {
+            toast.error(`Password and Confirm Password do not match.`, {
+                position: "top-right",
+                icon: '⚠️',
+            });
+            return;
+        }
+        if ((title === "signup" && Type === "merchant" && images?.length === 0)) {
+            toast.error('Please upload at least one affiliations pictures before submitting.', {
+                position: "top-right"
+            });
+            return;
+        }
 
+        const formDataToSend = new FormData();
+        Object.keys(FormValue).forEach((key) => {
+            formDataToSend.append(key, FormValue[key]);
+        });
+        formDataToSend.append("roleId", Type === "customer" ? 3 : 2);
 
+        if (title === "signup" && Type === "merchant") {
+            images.forEach((image, index) => {
+                formDataToSend.append(`images[${index}]`, image);
+            });
+        }
+        const APIURL = title === "login" ? 'api/login' : 'api/register'
+        const { data, error } = await HandleLoginSignUp(formDataToSend, APIURL);
+
+        if (data) {
+            toast.success(data?.message, {
+                position: "top-right",
+                duration: 4000
+            });
+            localStorage.setItem("token", data?.data?.token)
+            localStorage.setItem("email", FormValue["email"])
+            console.log(data, "data")
+            router.push('/verification');
+        } else {
+            if (error.message == "Network Error") {
+                toast.error(error.message, {
+                    position: "top-right"
+                });
+                return
+            }
+            toast.error(error?.response?.data?.error, {
+                position: "top-right"
+            });
+        }
+        console.log(error, "error response")
     };
 
 
     const handleImageChange = (e) => {
-        const files = Array.from(e.target.files);
-        const imageFiles = files.filter(file => file.type.startsWith('image/'));
-        setImages([...images, ...imageFiles]);
+        if (images?.length < 3) {
+            const files = Array.from(e.target.files);
+            const imageFiles = files.filter(file => file.type.startsWith('image/'));
+            setImages([...images, ...imageFiles]);
+        }
     };
-
 
     const handleChangeType = (type) => {
         setType(type);
@@ -112,17 +173,16 @@ function CredentailForm({ title }) {
 
 
     // options fields 
-
-    const options = [
-        { value: 'Pakistan', label: 'Pakistan', name: "country" },
-        { value: 'India', label: 'India', name: "country" },
-        { value: 'Finland', label: 'Finland', name: "country" }
-    ];
-    const options2 = [
-        { value: 'Pakistan', label: 'Pakistan', name: "city" },
-        { value: 'India', label: 'India', name: "city" },
-        { value: 'Finland', label: 'Finland', name: "city" }
-    ];
+    // const options = [
+    //     { value: 'Pakistan', label: 'Pakistan', name: "country" },
+    //     { value: 'India', label: 'India', name: "country" },
+    //     { value: 'Finland', label: 'Finland', name: "country" }
+    // ];
+    // const options2 = [
+    //     { value: 'Pakistan', label: 'Pakistan', name: "city" },
+    //     { value: 'India', label: 'India', name: "city" },
+    //     { value: 'Finland', label: 'Finland', name: "city" }
+    // ];
 
     const LoginFieldList = [
         {
@@ -144,6 +204,13 @@ function CredentailForm({ title }) {
     ]
 
     const SignupFieldList = [
+        {
+            name: "name",
+            label: "Name",
+            placeholder: "Fullname",
+            type: "text",
+            icon: <MdDriveFileRenameOutline size={20} color='#dc2626' />
+        },
         {
             name: "business_name",
             label: "Business Name",
@@ -182,17 +249,17 @@ function CredentailForm({ title }) {
         {
             name: "country",
             label: "Country",
-            placeholder: "Enter your country",
+            placeholder: "Select your country",
             type: "select",
-            options: options,
+            options: (Countries ? Countries : []),
             icon: <GiWorld size={20} color='#dc2626' />
         },
         {
             name: "city",
             label: "City",
-            placeholder: "Enter your city",
+            placeholder: "Select your city",
             type: "select",
-            options: options2,
+            options: (Cities ? Cities : []),
             icon: <FaCity size={20} color='#dc2626' />
 
         },
@@ -238,17 +305,17 @@ function CredentailForm({ title }) {
         {
             name: "country",
             label: "Country",
-            placeholder: "Enter your country",
+            placeholder: "Select your country",
             type: "select",
-            options: options,
+            options: (Countries ? Countries : []),
             icon: <GiWorld size={20} color='#dc2626' />
         },
         {
             name: "city",
             label: "City",
-            placeholder: "Enter your city",
+            placeholder: "Select your city",
             type: "select",
-            options: options2,
+            options: (Cities ? Cities : []),
             icon: <FaCity size={20} color='#dc2626' />
         },
         {

@@ -1,6 +1,6 @@
 // apiUtils.js
 import axios from "axios";
-const baseUrl = 'http://owings.co/'; // replace with your actual base URL
+const baseUrl = 'http://192.168.100.25/owings/'; // replace with your actual base URL
 
 // headers and token
 export const headers = () => {
@@ -79,31 +79,39 @@ export const Delete = async (url) => {
   }
 };
 
+
+
+
+// Handle user 
+export const HandleLoginSignUp = async (formData, url) => {
+  try {
+    const data = await post(url, formData);
+    return { data, error: null };
+  } catch (error) {
+    return { data: null, error: error };
+  }
+};
+
 // get all countries 
 export const getCountries = async () => {
   try {
     const data = await get("api/get-countries");
     return { data, error: null };
   } catch (error) {
-    console.error("Error in  get country api", error);
-    return { data: null, error: error?.response?.data };
+    return { data: null, error: error };
   }
 };
 
-
-
-
-
-// Handle user 
-export const HandleLoginSignUp = async (formData) => {
+// get cities 
+export const getCities = async (id) => {
   try {
-    const data = await post("api/get-countries", formData);
+    const data = await get(`api/get-cities/${id}`);
     return { data, error: null };
   } catch (error) {
-    console.error("Error in Login SignUp :", error);
-    return { data: null, error: error?.response?.data };
+    return { data: null, error: error };
   }
 };
+
 
 
 // Handle ResendOTP 
@@ -113,7 +121,7 @@ export const ResendOTP = async (formData) => {
     return { data, error: null };
   } catch (error) {
     // console.error("Error in resend otp :", error);
-    return { data: null, error: error?.message };
+    return { data: null, error: error };
   }
 };
 
@@ -124,7 +132,7 @@ export const HandleConfirmOPT = async (formData) => {
     return { data, error: null };
   } catch (error) {
     // console.error("Error in resend otp :", error);
-    return { data: null, error: error?.message };
+    return { data: null, error: error };
   }
 };
 
@@ -136,7 +144,7 @@ export const HandleForgetPassword = async (formData) => {
     return { data, error: null };
   } catch (error) {
     // console.error("Error in resend otp :", error);
-    return { data: null, error: error?.message };
+    return { data: null, error: error };
   }
 };
 
@@ -147,6 +155,6 @@ export const HandleSetPassword = async (formData) => {
     return { data, error: null };
   } catch (error) {
     // console.error("Error in resend otp :", error);
-    return { data: null, error: error?.message };
+    return { data: null, error: error };
   }
 };
