@@ -39,8 +39,32 @@ function CredentailForm({ title }) {
         setFormValue({ ...FormValue, [name]: value });
     };
 
+    // const handleSelectChange = async (e) => {
+    //     const { name, value, id } = e;
+    //     if (name === "country") {
+    //         try {
+    //             const { data, error } = await getCities(id);
+    //             if (error) {
+    //                 console.error('Error fetching Cities:', error);
+    //                 return;
+    //             }
+    //             // setFormValue(prev => ({ ...prev, city: "" }));
+    //             const transformedcities = data?.data.map(city => ({
+    //                 value: city?.city,
+    //                 label: city?.city,
+    //                 name: "city",
+    //                 id: city?.id
+    //             })) || [];
+    //             setCities(transformedcities);
+    //         } catch (err) {
+    //             console.error('Unexpected error:', err);
+    //         }
+    //     }
+    //     setFormValue({ ...FormValue, [name]: id });
+    // }
     const handleSelectChange = async (e) => {
-        const { name, value, id } = e;
+        const { name, value, id } = e; // Use e.target to access the properties
+        
         if (name === "country") {
             try {
                 const { data, error } = await getCities(id);
@@ -48,20 +72,30 @@ function CredentailForm({ title }) {
                     console.error('Error fetching Cities:', error);
                     return;
                 }
-                const transformedcities = data?.data.map(city => ({
+                // Clear the city field
+                setFormValue(prev => ({ ...prev, city: "" }));
+    
+                const transformedCities = data?.data.map(city => ({
                     value: city?.city,
                     label: city?.city,
                     name: "city",
                     id: city?.id
                 })) || [];
-                setCities(transformedcities);
+                setCities(transformedCities);
             } catch (err) {
                 console.error('Unexpected error:', err);
             }
         }
-        setFormValue({ ...FormValue, [name]: id });
-    }
+    
+        // Update form value for the selected country
+        setFormValue(prev => ({ ...prev, [name]: id }));
+    };
+    
 
+    useEffect(() => {
+        console.log(FormValue);
+
+    }, [FormValue]);
     const fetchCountries = async () => {
         try {
             const { data, error } = await getCountries();
@@ -382,7 +416,7 @@ function CredentailForm({ title }) {
                                                     type={item.type}
                                                     icon={item?.icon}
                                                     onChange={handleInputChange}
-                                                    value={FormValue[item.name] ? FormValue[item.name] : ""}
+                                                    value={FormValue[item.name] ? FormValue[item?.name] : ""}
                                                 />
                                             </LabelInputContainer>
                                             :
@@ -390,8 +424,8 @@ function CredentailForm({ title }) {
                                                 className={cn("mb-4 px-2", { 'w-full md:w-1/2': title === "signup", 'w-full': title !== "signup" })}
                                                 key={index}
                                             >
-                                                <Label htmlFor={item.label}>{item.label}</Label>
-                                                <CustomSelect placeholder={item?.placeholder} options={item?.options} icon={item?.icon} onChange={handleSelectChange} />
+                                                <Label htmlFor={item?.label}>{item?.label}</Label>
+                                                <CustomSelect value={FormValue[item?.name] ? FormValue[item.name] : ""} placeholder={item?.placeholder} options={item?.options} icon={item?.icon} onChange={handleSelectChange} />
                                             </LabelInputContainer>
                                     )
                                 })

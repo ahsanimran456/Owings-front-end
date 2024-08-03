@@ -1,6 +1,6 @@
 // apiUtils.js
-import axios from "axios";
-const baseUrl = 'http://192.168.100.25/owings/'; // replace with your actual base URL
+import axios from "axios"; 
+const baseUrl = 'http://192.168.0.104/owings/'; // replace with your actual base URL 
 
 // headers and token
 export const headers = () => {

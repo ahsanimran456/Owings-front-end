@@ -3,7 +3,9 @@ import { cn } from "@/utils/cn";
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
 import ReactSelect from 'react-select'; // Renamed to avoid naming conflict
 
-const CustomSelect = React.forwardRef(({ className, placeholder, options, icon, onChange }, ref) => {
+const CustomSelect = React.forwardRef(({ className, placeholder, options, icon, onChange, value }, ref) => {
+ 
+
     const radius = 100; // change this to increase the radius of the hover effect
     const [visible, setVisible] = React.useState(false);
 
@@ -42,8 +44,8 @@ const CustomSelect = React.forwardRef(({ className, placeholder, options, icon, 
             backgroundColor: state.isSelected ? "var(--blue-500)" : "white", // Example of option background color change
             color: state.isSelected ? "white" : "black", // Example of option text color change
         }),
-        // Add more styles as needed for other elements
     };
+    const selectedOption = options.find(option => option.value == value);
 
     return (
         <motion.div
@@ -74,11 +76,11 @@ const CustomSelect = React.forwardRef(({ className, placeholder, options, icon, 
                         className
                     )}
                     ref={ref}
-                    // value={selectedOption}
+                    value={selectedOption}
                     onChange={onChange}
                     options={options}
                     placeholder={placeholder}
-                    styles={customStyles} // Apply custom styles
+                    styles={customStyles}
                 />
                 {icon && (
                     <span className="absolute right-3">
