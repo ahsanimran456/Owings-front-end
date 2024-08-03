@@ -21,7 +21,7 @@ import { GiWorld } from "react-icons/gi";
 import { FaCity } from "react-icons/fa";
 import { CustomSelect } from "../ui/select";
 import { FaGetPocket } from "react-icons/fa6";
-import { getCities, getCountries, HandleLoginSignUp } from "@/Api/ApiUtils";
+import { getCities, getCountries, HandleLoginSignUp, ResendOTP } from "@/Api/ApiUtils";
 import toast from "react-hot-toast";
 import validateField from "../Alerts/SingleFieldAlert";
 
@@ -62,9 +62,9 @@ function CredentailForm({ title }) {
     //     }
     //     setFormValue({ ...FormValue, [name]: id });
     // }
+
     const handleSelectChange = async (e) => {
         const { name, value, id } = e; // Use e.target to access the properties
-        
         if (name === "country") {
             try {
                 const { data, error } = await getCities(id);
@@ -72,9 +72,7 @@ function CredentailForm({ title }) {
                     console.error('Error fetching Cities:', error);
                     return;
                 }
-                // Clear the city field
                 setFormValue(prev => ({ ...prev, city: "" }));
-    
                 const transformedCities = data?.data.map(city => ({
                     value: city?.city,
                     label: city?.city,
@@ -86,16 +84,9 @@ function CredentailForm({ title }) {
                 console.error('Unexpected error:', err);
             }
         }
-    
-        // Update form value for the selected country
         setFormValue(prev => ({ ...prev, [name]: id }));
     };
-    
 
-    useEffect(() => {
-        console.log(FormValue);
-
-    }, [FormValue]);
     const fetchCountries = async () => {
         try {
             const { data, error } = await getCountries();
@@ -122,19 +113,17 @@ function CredentailForm({ title }) {
         e.preventDefault();
         const requiredFields = title === "login" ? LoginFieldList : (Type === "customer" ? SignupFieldListForCustomer : SignupFieldList);
         const missingFields = requiredFields.filter(field => !FormValue[field.name]);
-        if (missingFields.length > 0) {
+        if (missingFields?.length > 0) {
             const missingFieldNames = missingFields.map(field => field.label).join(', ');
             toast(`Please fill in the following fields: ${missingFieldNames}`, {
                 position: "top-right"
             });
             return;
         }
-        let isValid = true;
         for (const field of requiredFields) {
             const value = FormValue[field?.name];
             if (value !== undefined || value !== null || value !== "") {
                 if (validateField(field, value)) {
-                    isValid = false;
                     return;
                 }
             }
@@ -174,8 +163,12 @@ function CredentailForm({ title }) {
             });
             localStorage.setItem("token", data?.data?.token)
             localStorage.setItem("email", FormValue["email"])
-            console.log(data, "data")
-            router.push('/verification');
+            if (title === "signup") {
+                router.push('/verification');
+            }
+            if (title === "login") {
+                router.push('/');
+            }
         } else {
             if (error.message == "Network Error") {
                 toast.error(error.message, {
@@ -184,8 +177,26 @@ function CredentailForm({ title }) {
                 return
             }
             toast.error(error?.response?.data?.error, {
-                position: "top-right"
+                position: "top-right",
+                duration:3000
             });
+            if (error?.response?.data?.error == "User account is not active") {
+                localStorage.setItem("email", FormValue["email"])
+                const formDataToSend = new FormData();
+                formDataToSend.append('email', FormValue["email"]);
+                const { data, error } = await ResendOTP(formDataToSend);
+                if (error) {
+                    toast.error(error?.response?.data?.error, {
+                        position: "top-right"
+                    });
+                    return;
+                }
+                if (data) {
+                    setTimeout(() => {
+                        router.push('/verification');
+                    }, 1000);
+                }
+            }
         }
         console.log(error, "error response")
     };
