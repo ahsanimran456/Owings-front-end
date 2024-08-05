@@ -13,29 +13,70 @@ const OtpVerification = () => {
     const [otp, setOtp] = useState('');
     const [ISsubmited, setISsubmited] = useState(false);
 
-    const HandleResendOTP = () => {
+    const HandleResendOTP = async () => {
         setISsubmited(true)
         const userEmail = localStorage.getItem('email');
         const formDataToSend = new FormData();
         formDataToSend.append('email', userEmail);
-        const { data, error } = ResendOTP(formDataToSend)
-        setISsubmited(false)
+        try {
+            const { data, error } = await ResendOTP(formDataToSend)
+            if (error) {
+                toast.error(error?.response?.data?.error, {
+                    position: "top-right"
+                });
+                return;
+            }
+            if (data) {
+                toast.success(data?.message, {
+                    position: "top-right"
+                });
+            }
+            setISsubmited(false)
+        } catch (e) {
+            setISsubmited(false)
+        }
     }
 
-    const ConfirmOTP = (e) => {
+    const ConfirmOTP = async (e) => {
         e.preventDefault();
         setISsubmited(true)
-        if (otp?.length == 6) {
-            const userEmail = localStorage.getItem('email');
-            const formDataToSend = new FormData();
-            formDataToSend.append('email', userEmail);
-            formDataToSend.append('otpCode', otp);
-            router.push('/');
-            const { data, error } = HandleConfirmOPT(formDataToSend)
+        const userEmail = localStorage.getItem('email');
+        if (otp?.length == 6 && userEmail) {
+            try {
+                const formDataToSend = new FormData();
+                formDataToSend.append('email', userEmail);
+                formDataToSend.append('otpCode', otp);
+                const { data, error } = await HandleConfirmOPT(formDataToSend)
+                if (error) {
+                    toast.error(error?.response?.data?.error, {
+                        position: "top-right"
+                    });
+                    setISsubmited(false)
+                    return;
+                }
+                if (data) {
+                    toast.success(data?.message, {
+                        position: "top-right",
+                        duration: 3000
+
+                    });
+                    setTimeout(() => {
+                        router.push('/');
+                    }, 2000);
+                }
+                setISsubmited(false)
+            }
+            catch (e) {
+                toast.error(e, {
+                    position: "top-right"
+                });
+                setISsubmited(false)
+            }
         } else if (otp?.length == 4 || otp?.length == 5) {
             toast.error(`Please enter valid OTP.`, {
                 position: "top-right"
             });
+            setISsubmited(false)
         }
         setISsubmited(false)
     }
@@ -83,6 +124,7 @@ const OtpVerification = () => {
                         className="bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br         relative group/btn  dark:from-zinc-900 dark:to-zinc-900 block dark:bg-zinc-800 w-full text-white rounded-md h-10 font-medium shadow-[0px_1px_0px_0px_#ffffff40_inset,0px_-1px_0px_0px_#ffffff40_inset] dark:shadow-[0px_1px_0px_0px_var(--zinc-800)_inset,0px_-1px_0px_0px_var(--zinc-800)_inset]"
                         type="submit"
                         onClick={ConfirmOTP}
+                        disabled={ISsubmited}
                     >
                         Confirm
                     </button>
