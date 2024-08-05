@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import React from 'react';
 // import logo from '../../../public/Images/logo-img.png';
-import logo from '../../../public/Images/LOGO-F.png';
+import logo from '../../../public/Images/owingslogo.png';
 import Link from 'next/link';
 
 function Navbar() {
@@ -16,7 +16,7 @@ function Navbar() {
             <nav className='lg:max-w-screen-2xl md:mx-auto px-10 py-2'>
                 <div className='flex justify-between items-center sticky w-full  text-white '>
                     <div className="">
-                        <Image src={logo} width={70} height={35} alt="web-logo" />
+                        <Image src={logo} width={80} height={100} alt="web-logo" />
                     </div>
                     <div className="nav-items">
                         <ul className='flex justify-between items-center space-x-5 font-medium'>
