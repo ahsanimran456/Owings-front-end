@@ -7,7 +7,9 @@ import banner3 from '../../../public/Images/bannerimg3.jpg';
 import banner4 from '../../../public/Images/bannerimg4.jpg';
 import banner5 from '../../../public/Images/bannerimg5.jpg';
 import bannermobile from '../../../public/Images/hero-banner-mobile.png';
-
+import NavbarComp from './NavbarComp';
+import { FaApple, FaGooglePlay } from "react-icons/fa";
+import Link from 'next/link';
 const images = [banner1, banner2, banner3, banner4, banner5];
 
 const HeroSection2 = () => {
@@ -23,7 +25,6 @@ const HeroSection2 = () => {
 
   return (
     <section className='hero-section-2'>
-
       <div className="overlay-hero-section"></div>
       <div className='hero-section-2__container h-full'>
         <div className='bg-imges-shows'>
@@ -44,20 +45,43 @@ const HeroSection2 = () => {
 
 
         </div>
+        <div className='lg:max-w-screen-2xl md:mx-auto px-14'>
+          <NavbarComp />
+        </div>
         <div className='hero-section-content lg:max-w-screen-2xl md:mx-auto px-14'>
           <div className='max-w-[36rem]'>
             <h1 className='text-[#fff] text-8xl font-bold leading-[1.2] font-poppins'>
               Now Everything is Simple with Owings
             </h1>
+            <p className='leading-7'>
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+            </p>
+            <div className='flex space-x-4 mt-4'>
+              {/* App Store Button */}
+              <Link href='/' className='flex items-center space-x-2 bg-white text-black py-2 px-6 min-w-52 rounded-full'>
+                <FaApple size={30} />
+                <div className='flex flex-col text-left'>
+                  <span className='text-xs'>Download on the</span>
+                  <span className='font-bold text-lg'>App Store</span>
+                </div>
+              </Link>
+
+              {/* Play Store Button */}
+              <Link href='/' className='flex items-center space-x-2 bg-green-500 text-white py-2 px-6 min-w-52 rounded-full'>
+                <FaGooglePlay size={24} />
+                <div className='flex flex-col   text-center'>
+                  <span className='text-xs'>Download on the</span>
+                  <span className='font-bold text-lg'>Play Store</span>
+                </div>
+              </Link>
+            </div>
           </div>
           <div className='hero-banner-mobile'>
             <Image
               src={bannermobile}
               alt={`hero-banner-mobile`}
-              width={300}
-              height={300}
-            // objectFit='cover'
-            // className={`bg-imges-shows__img ${index === currentImageIndex ? 'active' : ''}`}
+              width={350}
+              height={350}
             />
           </div>
         </div>

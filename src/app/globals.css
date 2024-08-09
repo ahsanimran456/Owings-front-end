@@ -6,7 +6,7 @@
 
 .hero-section-2 {
     position: relative;
-    height: 800px;
+    height: 880px;
     /* overflow: hidden; */
 }
 
@@ -69,32 +69,72 @@
 .hero-section-content{
     width: 100%;
     display: flex;
-    align-items: center;
+    /* align-items: center; */
     justify-content: space-between;
     height: 100%;
     position: relative;
     z-index: 2;
-    
 }
 
 .hero-section-content h1{
     font-size: 3.5rem;
     font-weight: 600;
     color: #fff;
-    text-align: center;
     margin-bottom: 20px;
+    margin-top: 73px;
 }
 
+.hero-banner-mobile{
+    margin-top: 20px;
+
+}
 .hero-section-content p{
-    font-size: 1.2rem;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 1rem;
     font-weight: 400;
     color: #fff;
-    text-align: center;
     margin-bottom: 20px;
 
 }
 
 
+.main-navbar a {
+    position: relative;
+}
+
+.main-navbar a::before{
+    background: #FFFFFF;
+    content: "";
+    height: 2px;
+    left: 0;
+    position: absolute;
+    top: 43px;
+    transform: scaleX(0);
+    transform-origin: right top 0;
+    transition: transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) 0s, -webkit-transform 0.3s cubic-bezier(0.165, 0.84, 0.44, 1) 0s;
+    width: 100%;
+}
+
+.main-navbar a:hover::before{
+    -webkit-transform: scaleX(1);
+    -webkit-transform-origin: left top 0;
+}
+
+
+.our-service h1{
+    position: relative;
+}
+.our-service h1::before{
+    content: "";
+    position: absolute;
+    width: 70px;
+    height: 2px;
+    background: linear-gradient(to right, #2371ae 0%, #bb47d4 100%);
+    bottom: -10px;
+    text-align: center;
+    transform: translate(-50%, 0);
+    left: 50%;
+}
 
 
 

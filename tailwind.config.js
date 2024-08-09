@@ -32,7 +32,8 @@ module.exports = {
         'category-boxshadow-hover': '5px 5px 15px rgba(0, 0, 0, 0.13)',
       },
       fontFamily: {
-        poppins: ['Poppins', 'sans-serif'],
+        poppins: ['Poppins', 'sans-serif',],
+        WonderUnitSans: ['WonderUnitSans-Regular', 'sans-serif'],
       },
     },
   },
