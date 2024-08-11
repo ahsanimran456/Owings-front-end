@@ -30,11 +30,13 @@ module.exports = {
       boxShadow: {
         input: `0px 2px 3px -1px rgba(0,0,0,0.1), 0px 1px 0px 0px rgba(25,28,33,0.02), 0px 0px 0px 1px rgba(25,28,33,0.08)`,// Added from the first file
         'category-boxshadow-hover': '5px 5px 15px rgba(0, 0, 0, 0.13)',
+        'service-shadow':`0 1px 5px 0 rgba(5, 5, 5, 0.2)`
       },
       fontFamily: {
         poppins: ['Poppins', 'sans-serif',],
-        WonderUnitSans: ['WonderUnitSans-Regular', 'sans-serif'],
+        WonderUnitSans: ['Work Sans'],
       },
+      
     },
   },
   plugins: [addVariablesForColors],

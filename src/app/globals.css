@@ -2,7 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap');
 
 .hero-section-2 {
     position: relative;
@@ -135,6 +135,20 @@
     transform: translate(-50%, 0);
     left: 50%;
 }
+
+.service-cart::before{
+    content: "";
+    position: absolute;
+    bottom: 0.3px;
+    left: 0;
+    width: 100%;
+    height: 4px;
+    background: linear-gradient(to right, #60a5fa, #a78bfa, #f472b6); 
+
+}
+
+
+
 
 
 
