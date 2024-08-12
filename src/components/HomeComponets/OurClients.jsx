@@ -53,6 +53,7 @@ const OurClients = () => {
         speed: 500,
         slidesToShow: 2,
         slidesToScroll: 1,
+        arrows: false,
         responsive: [
             {
                 breakpoint: 1024,
@@ -61,6 +62,7 @@ const OurClients = () => {
                     slidesToScroll: 1,
                     infinite: true,
                     dots: true,
+                    arrows: false,
                 },
             },
             {
@@ -68,6 +70,7 @@ const OurClients = () => {
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
+                    arrows: false,
                 },
             },
         ],

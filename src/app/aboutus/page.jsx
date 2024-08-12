@@ -1,13 +1,31 @@
 import Webbanner from "@/components/MainComponents/Webbanner"
 import aboutus from "../../../public/Images/aboutus.png"
-import bannerimg from "../../../public/Images/banner.jpg"
+import bannerimg from "../../../public/Images/aboutusbg.jpg"
+import aboutusshadowimg from "../../../public/Images/aboutus-shadow-img.png"
 import Image from 'next/image'
 const Aboutus = () => {
     return (
         <>
-            <Webbanner tittle={"CONTACT US"} subtop={"A FEW WORDS"} image={bannerimg} />
-            <div className="max-w-screen-2xl mx-auto w-full h-full px-20  pb-20">
-                <div className='mt-[-25px] pb-5'>
+            <Webbanner tittle={"About Us"} subtop={"A FEW WORDS"} image={bannerimg} className={'about-clip-path'} />
+            <div className="max-w-screen-2xl mx-auto w-full h-full px-14 pb-20">
+                <div className="py-20">
+                    <div className="grid grid-cols-2 gap-4 ">
+                        <div></div>
+                        <div className="bg-contain bg-no-repeat bg-center" style={{ backgroundImage: `url(${aboutusshadowimg.src})` }}>
+                            <h2>
+                                Our strategy
+                            </h2>
+                            <p>
+                                By being the fuel supplier with the
+                                lowest cost and the highest service
+                                levels, we aim to earn the loyalty of
+                                existing customers.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                {/* <div className='mt-20 pb-5'>
                     <div className="grid grid-cols-2 gap-4 ">
                         <div className='flex justify-center items-center'>
                             <Image
@@ -53,7 +71,7 @@ const Aboutus = () => {
                             <button className="text-white mt-2 bg-gradient-to-r from-red-400 via-red-500 to-red-600 hover:bg-gradient-to-br  focus:outline-none  shadow-lg shadow-red-500/50  font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2 mb-2">Continue</button>
                         </div>
                     </div>
-                </div>
+                </div> */}
             </div>
         </>
     )

@@ -79,12 +79,15 @@ const OurVendors = () => {
         speed: 500,
         slidesToShow: 3, // Show 3 items at a time on large screens
         slidesToScroll: 1,
+        arrows: false,
+
         responsive: [
             {
                 breakpoint: 1024,
                 settings: {
                     slidesToShow: 2, // Show 2 items on medium screens
                     slidesToScroll: 1,
+                    arrows: false,
                 },
             },
             {
@@ -92,6 +95,7 @@ const OurVendors = () => {
                 settings: {
                     slidesToShow: 1, // Show 1 item on small screens
                     slidesToScroll: 1,
+                    arrows: false,
                 },
             },
         ],

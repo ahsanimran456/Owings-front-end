@@ -100,11 +100,11 @@
 }
 
 
-.main-navbar a {
+.main-navbar a,.all-banners-web a {
     position: relative;
 }
 
-.main-navbar a::before {
+.main-navbar a::before, .all-banners-web a::before {
     background: #FFFFFF;
     content: "";
     height: 2px;
@@ -117,7 +117,7 @@
     width: 100%;
 }
 
-.main-navbar a:hover::before {
+.main-navbar a:hover::before,.all-banners-web a:hover::before {
     -webkit-transform: scaleX(1);
     -webkit-transform-origin: left top 0;
 }
@@ -316,6 +316,28 @@
 .slick-dots li.slick-active button:before {
     background: linear-gradient(to right, #60a5fa, #a78bfa, #f472b6); /* Different gradient for the active dot */
     opacity: 1; /* Make sure the active dot is fully opaque */
+}
+
+.slick-dots{
+    bottom: -41px !important;
+}
+
+
+
+.about-clip-path{
+    clip-path: ellipse(93% 100% at top);
+}
+.overlay-allbanner{
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    right: 0;
+    background-image: linear-gradient(to right top, #2725b9d4, #3a39dcd1, #e748bec2, #e748bec9, #e748beb5) !important;
+    /* background-image: linear-gradient(to right top, rgba(96, 165, 250, 0.7), rgba(167, 139, 250, 0.7), rgba(244, 114, 182, 0.7)) !important; */
+
 }
 
 
