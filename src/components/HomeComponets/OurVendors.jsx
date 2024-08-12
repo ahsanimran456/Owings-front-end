@@ -1,10 +1,12 @@
 'use client';
 import React, { useState } from 'react';
+import Slider from 'react-slick';
 import Image from 'next/image';
 import { motion } from 'framer-motion';
 import workimg from '../../../public/Images/vendor1.jpg';
 import workimg2 from '../../../public/Images/vendor2.jpg';
 import workimg3 from '../../../public/Images/vendor3.jpg';
+
 
 const OurVendors = () => {
     const [hoveredImage, setHoveredImage] = useState(null);
@@ -17,7 +19,6 @@ const OurVendors = () => {
         setHoveredImage(null);
     };
 
-    // Vendor data (replace with your actual data)
     const vendors = [
         {
             id: 1,
@@ -37,22 +38,63 @@ const OurVendors = () => {
             name: 'Vendor 3',
             description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
         },
-        // ... more vendors
+        {
+            id: 4,
+            image: workimg,
+            name: 'Vendor 4',
+            description: 'Lorem ipsum dolor sit amet, consectetur adipisicing elit.',
+        },
+        {
+            id: 5,
+            image: workimg2,
+            name: 'Vendor 5',
+            description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        },
+        {
+            id: 6,
+            image: workimg3,
+            name: 'Vendor 6',
+            description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.',
+        },
     ];
 
     const vendorHoverVariants = {
         initial: {
             opacity: 0,
-            transform: 'translateX(-100%)', // Initially hidden on the left
+            transform: 'translateX(-100%)',
         },
         hover: {
-            opacity: 0.8, // Slightly transparent overlay
-            transform: 'translateX(0)', // Animate to the original position
+            opacity: 0.8,
+            transform: 'translateX(0)',
             transition: {
-                duration: 0.3, // Adjust animation duration as needed
-                ease: 'easeInOut', // Customize animation easing
+                duration: 0.3,
+                ease: 'easeInOut',
             },
         },
+    };
+
+    const settings = {
+        dots: true,
+        infinite: true,
+        speed: 500,
+        slidesToShow: 3, // Show 3 items at a time on large screens
+        slidesToScroll: 1,
+        responsive: [
+            {
+                breakpoint: 1024,
+                settings: {
+                    slidesToShow: 2, // Show 2 items on medium screens
+                    slidesToScroll: 1,
+                },
+            },
+            {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 1, // Show 1 item on small screens
+                    slidesToScroll: 1,
+                },
+            },
+        ],
     };
 
     return (
@@ -67,32 +109,32 @@ const OurVendors = () => {
                     </p>
                 </div>
 
-                <div className="grid grid-cols-3 gap-4 mt-12">
+                <Slider {...settings} className="mt-12">
                     {vendors.map((vendor, index) => (
                         <div
                             key={vendor.id}
                             onMouseEnter={() => handleMouseEnter(index)}
                             onMouseLeave={handleMouseLeave}
-                            className="relative overflow-hidden"
+                            className=" overflow-hidden px-4 relative"
                         >
                             <Image
                                 src={vendor.image}
                                 alt={vendor.name}
-                                width={200} // Adjust width as needed
-                                height={200} // Adjust height as needed
+                                width={200}
+                                height={200}
                                 layout="responsive"
                                 objectFit="cover"
-                                className="rounded-md"
+                                className="rounded-md "
                             />
                             <motion.div
                                 variants={vendorHoverVariants}
                                 initial="initial"
                                 animate={hoveredImage === index ? 'hover' : 'initial'}
-                                className="absolute inset-0 p-4 flex items-center justify-center"
+                                className="absolute m-auto w-[93%] inset-0 p-4 flex items-center justify-center rounded-md "
                                 style={{
-                                    background: 'linear-gradient(to right, #2371ae 0%, #bb47d4 100%)', // Linear gradient background
-                                    zIndex: 10, // Ensure the overlay appears above the image
-                                    opacity: hoveredImage === index ? 0.8 : 0, // Adjust opacity for hover state
+                                    background: 'linear-gradient(to right, #2371ae 0%, #bb47d4 100%)',
+                                    zIndex: 10,
+                                    opacity: hoveredImage === index ? 0.8 : 0,
                                 }}
                             >
                                 <div className="text-center">
@@ -102,7 +144,7 @@ const OurVendors = () => {
                             </motion.div>
                         </div>
                     ))}
-                </div>
+                </Slider>
             </div>
         </section>
     );

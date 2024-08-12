@@ -301,6 +301,25 @@
 }
 
 
+.slick-dots li button:before {
+    font-size: 10px;
+    color: transparent; /* Set the base color to transparent */
+    background:linear-gradient(to right, #60a5fa, #a78bfa, #f472b6);
+    border-radius: 50%; /* Make it circular */
+    width: 12px !important;
+    height: 12px !important;
+    content: '';
+    display: inline-block;
+    color: unset !important;
+}
+
+.slick-dots li.slick-active button:before {
+    background: linear-gradient(to right, #60a5fa, #a78bfa, #f472b6); /* Different gradient for the active dot */
+    opacity: 1; /* Make sure the active dot is fully opaque */
+}
+
+
+
 
 
 .section-choose-background {

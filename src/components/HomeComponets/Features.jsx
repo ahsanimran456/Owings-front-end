@@ -45,7 +45,7 @@ const Features = () => {
                     </div>
 
                     {/* Middle Section */}
-                    <div className='w-1/2 flex justify-center h-[40rem]'>
+                    <div className='w-1/2 flex justify-center h-[44rem]'>
                         <Image
                             src={workimg}
                             alt="Landing page preview"
