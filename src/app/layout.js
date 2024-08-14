@@ -1,12 +1,38 @@
-import { Inter } from "next/font/google";
+import {Inter ,Roboto ,Open_Sans,Poppins,Work_Sans } from 'next/font/google';
 import "./globals.css";
 import Navbar from "@/components/MainComponents/Navbar";
 import Footer from "@/components/MainComponents/Footer";
-import "slick-carousel/slick/slick.css"; 
+import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { Toaster } from "react-hot-toast";
 
 const inter = Inter({ subsets: ["latin"] });
+
+const poppins = Poppins({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+  variable: '--font-poppins',
+});
+
+
+const roboto = Roboto({
+  weight: ['100', '300', '400', '500'],
+  subsets: ['latin'],
+  variable: '--font-roboto',
+});
+
+const openSans = Open_Sans({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  variable: '--font-openSans',
+})
+
+const workSans = Work_Sans({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+  variable: '--font-workSans',
+
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -16,7 +42,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={inter.className}>
+       <body className={`${inter.className} ${poppins.className} ${roboto.className}  ${openSans.className}  ${workSans.className}`}>
         {/* <Navbar /> */}
         {children}
         <Toaster />

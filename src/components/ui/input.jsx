@@ -4,7 +4,7 @@ import { cn } from "@/utils/cn";
 import { useMotionTemplate, useMotionValue, motion } from "framer-motion";
 
 
-const Input = React.forwardRef(({ className, type, icon, onChange, value, name, placeholder }, ref) => {
+const Input = React.forwardRef(({ className, type, icon, onChange, value, name, placeholder,parentClass }, ref) => {
 
     const radius = 100; // change this to increase the radius of the hover effect
     const [visible, setVisible] = React.useState(false);
@@ -33,11 +33,11 @@ const Input = React.forwardRef(({ className, type, icon, onChange, value, name, 
             onMouseMove={handleMouseMove}
             onMouseEnter={() => setVisible(true)}
             onMouseLeave={() => setVisible(false)}
-            className="p-[2px] rounded-lg transition duration-300 group/input"
+            className={`p-[2px] rounded-lg transition duration-300 group/input ${parentClass}`}
         >
 
             {/* for 2 icon  */}
-            <div className="relative flex items-center">
+            <div className="relative flex items-center w-full">
                 <input
                     type={type}
                     className={cn(

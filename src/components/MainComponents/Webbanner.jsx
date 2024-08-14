@@ -5,7 +5,7 @@ import Image from 'next/image';
 
 
 
-const Webbanner = ({ tittle, subtop, image, className }) => {
+const Webbanner = ({ tittle, subtop, image, className,bannerDescription }) => {
     const navItems = [
         { name: 'Home', path: '/' },
         { name: 'About Us', path: '/aboutus' },
@@ -39,13 +39,13 @@ const Webbanner = ({ tittle, subtop, image, className }) => {
                             </ul>
                         </div>
                     </div>
-                    <div className={`flex flex-col items-start  min-h-[420px] ${(tittle == "Login" || tittle == "Sign up") && "flex-col-reverse"} `}>
+                    <div className={`flex flex-col items-start  min-h-[320px] ${(tittle == "Login" || tittle == "Sign up") && "flex-col-reverse"} `}>
                         <div className='mt-16 text-center text-texture'>
                             {subtop && <h5 className='text-white'>{tittle ? subtop : ""}</h5>}
                             <h1 className='text-[white] text-5xl font-bold mb-2'>{tittle ? tittle : "Owings Web"}</h1>
                             <div className='max-w-[60%] mx-auto mt-10' >
-                                <p className='text-white'>No hours sank into aggregating and cleaning data. No complex SQL queries required. Just the answers
-                                    teams need to make smarter decisions, fast. Now, that's data-driven.
+                                <p className='text-white'>
+                                    {bannerDescription}
                                 </p>
                             </div>
                         </div>
