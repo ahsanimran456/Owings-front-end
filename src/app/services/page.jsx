@@ -111,17 +111,17 @@ const Service = () => {
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
                         <div className="bg-white service-carts hover:text-white cursor-pointer p-6 rounded-lg shadow-service-shadow text-center transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-400 hover:via-purple-400 hover:to-pink-400 hover:transform hover:translate-y-[-10px]">
                             <FaPaintBrush className="text-4xl text-[#8158C6] mx-auto mb-4 hover:text-white" />
-                            <h3 className="text-lg font-OpenSans font-bold mb-2">We Design Fabric</h3>
+                            <h3 className="text-md text-[#444444] font-OpenSans font-semibold mb-2">We Design Fabric</h3>
                             <p>Choose from many fabrics and design your own. Create and print only the fabric you need with no minimum order.</p>
                         </div>
                         <div className="bg-white service-carts hover:text-white cursor-pointer p-6 rounded-lg shadow-service-shadow text-center transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-400 hover:via-purple-400 hover:to-pink-400 hover:transform hover:translate-y-[-10px]">
                             <FaIndustry color="#8158C6" className=" text-4xl mx-auto mb-4" />
-                            <h3 className="text-lg font-OpenSans font-bold mb-2">We Manufacture</h3>
+                            <h3 className="text-md text-[#444444] font-OpenSans font-semibold mb-2">We Manufacture</h3>
                             <p>Submit a manufacturer to be featured with a free video, and we'll send you a free sample to find what you need.</p>
                         </div>
                         <div className="bg-white service-carts hover:text-white cursor-pointer p-6 rounded-lg shadow-service-shadow text-center transition-all duration-300 hover:bg-gradient-to-r hover:from-blue-400 hover:via-purple-400 hover:to-pink-400 hover:transform hover:translate-y-[-10px]">
                             <FaCog color="#8158C6" className=" text-4xl mx-auto mb-4" />
-                            <h3 className="text-lg font-OpenSans font-bold mb-2">We Engineer</h3>
+                            <h3 className="text-md text-[#444444] font-OpenSans font-semibold mb-2">We Engineer</h3>
                             <p>We carry an enormous inventory of everything you need to complete your project: notions, patterns, and trims.</p>
                         </div>
                     </div>
@@ -260,25 +260,32 @@ const Service = () => {
                     </div>
                     <div>
                         <div className="grid grid-cols-1 sm:grid-cols-4 gap-8 mt-20 p-4">
-                            <div className="flex flex-col items-center text-center bg-[#f9f9ff] border cursor-pointer hover:shadow-service-main-shadow-hover shadow-lg p-6 rounded-lg">
+                            <div className="flex gap-7 items-center text-center hover:transform transition-all duration-300 hover:translate-y-[-10px]  bg-[#f9f9ff] border cursor-pointer hover:shadow-service-main-shadow-hover shadow-lg p-6 rounded-lg">
                                 <FaRegUser className="text-4xl text-[#8158C6] mb-4" />
-                                <h3 className="text-xl font-OpenSans font-bold mb-2 text-gray-800">Clients</h3>
-                                <Counter number={10000} start={0} />
+                                <div>
+                                    <h3 className="text-xl font-OpenSans font-bold mb-2 text-gray-800">Clients</h3>
+                                    <Counter number={10000} start={0} />
+                                </div>
                             </div>
-                            <div className="flex flex-col items-center text-center bg-[#f9f9ff] border cursor-pointer hover:shadow-service-main-shadow-hover shadow-lg p-6 rounded-lg">
+                            <div className="flex gap-7 items-center hover:transform transition-all duration-300 hover:translate-y-[-10px] text-center bg-[#f9f9ff] border cursor-pointer hover:shadow-service-main-shadow-hover shadow-lg p-6 rounded-lg">
                                 <MdOutlineShoppingCart className="text-4xl text-[#8158C6] mb-4" />
-                                <h3 className="text-xl font-OpenSans font-bold mb-2 text-gray-800">Services</h3>
-                                <Counter number={15} start={0} />
+                                <div>
+                                    <h3 className="text-xl font-OpenSans font-bold mb-2 text-gray-800">Services</h3>
+                                    <Counter number={1200} start={0} />
+                                </div>
                             </div>
-                            <div className="flex flex-col items-center text-center bg-[#f9f9ff] border cursor-pointer hover:shadow-service-main-shadow-hover shadow-lg p-6 rounded-lg">
+                            <div className="flex gap-7 items-center hover:transform transition-all duration-300 hover:translate-y-[-10px] text-center bg-[#f9f9ff] border cursor-pointer hover:shadow-service-main-shadow-hover shadow-lg p-6 rounded-lg">
                                 <BsPersonBadge className="text-4xl text-[#8158C6] mb-4" />
-                                <h3 className="text-xl font-OpenSans font-bold mb-2 text-gray-800">Merchants</h3>
-                                <Counter number={5067} start={0} />
+                                <div>
+                                    <h3 className="text-xl font-OpenSans font-bold mb-2 text-gray-800">Merchants</h3>
+                                    <Counter number={5067} start={0} />
+                                </div>
                             </div>
-                            <div className="flex flex-col items-center text-center bg-[#f9f9ff] border cursor-pointer hover:shadow-service-main-shadow-hover shadow-lg p-6 rounded-lg">
+                            <div className="flex gap-7 items-center hover:transform transition-all duration-300 hover:translate-y-[-10px] text-center bg-[#f9f9ff] border cursor-pointer hover:shadow-service-main-shadow-hover shadow-lg p-6 rounded-lg">
                                 <IoCloudDownloadOutline className="text-4xl text-[#8158C6] mb-4" />
-                                <h3 className="text-xl font-OpenSans font-bold mb-2 text-gray-800">Downloads</h3>
-                                <Counter number={20000} start={0} />
+                                <div> <h3 className="text-xl font-OpenSans font-bold mb-2 text-gray-800">Downloads</h3>
+                                    <Counter number={20000} start={0} />
+                                </div>
                             </div>
                         </div>
                     </div>

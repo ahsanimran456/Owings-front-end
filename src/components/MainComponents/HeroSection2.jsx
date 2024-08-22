@@ -18,7 +18,7 @@ const HeroSection2 = () => {
   React.useEffect(() => {
     const interval = setInterval(() => {
       setCurrentImageIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 10000); // 7200ms = 7.2s for each image
+    }, 7200); // 7200ms = 7.2s for each image
 
     return () => clearInterval(interval);
   }, []);

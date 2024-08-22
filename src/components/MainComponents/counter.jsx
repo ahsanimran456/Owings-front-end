@@ -29,7 +29,7 @@ const Counter = ({ number, start }) => {
             },
             { threshold: 0.1 }
         );
-        const el = document.querySelector('.counter'); // Make sure to add a class or ID for selection
+        const el = document.querySelector('.counter'); 
         if (el) {
             observer.observe(el);
         }

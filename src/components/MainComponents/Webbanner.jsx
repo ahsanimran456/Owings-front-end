@@ -39,7 +39,7 @@ const Webbanner = ({ tittle, subtop, image, className,bannerDescription }) => {
                             </ul>
                         </div>
                     </div>
-                    <div className={`flex flex-col items-start  min-h-[320px] ${(tittle == "Login" || tittle == "Sign up") && "flex-col-reverse"} `}>
+                    <div className={`flex flex-col  min-h-[320px] ${(tittle == "Login" || tittle == "Sign up") && "flex-col-reverse"} `}>
                         <div className='mt-16 text-center text-texture'>
                             {subtop && <h5 className='text-white'>{tittle ? subtop : ""}</h5>}
                             <h1 className='text-[white] text-5xl font-bold mb-2'>{tittle ? tittle : "Owings Web"}</h1>

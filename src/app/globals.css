@@ -102,11 +102,13 @@
 }
 
 
-.main-navbar a,.all-banners-web a {
+.main-navbar a,
+.all-banners-web a {
     position: relative;
 }
 
-.main-navbar a::before, .all-banners-web a::before {
+.main-navbar a::before,
+.all-banners-web a::before {
     background: #FFFFFF;
     content: "";
     height: 2px;
@@ -119,7 +121,8 @@
     width: 100%;
 }
 
-.main-navbar a:hover::before,.all-banners-web a:hover::before {
+.main-navbar a:hover::before,
+.all-banners-web a:hover::before {
     -webkit-transform: scaleX(1);
     -webkit-transform-origin: left top 0;
 }
@@ -272,13 +275,15 @@
 }
 
 .slider-item {
-    min-width: 33.33%; /* Show 3 items at a time */
+    min-width: 33.33%;
+    /* Show 3 items at a time */
     box-sizing: border-box;
     padding: 0 10px;
     position: relative;
 }
 
-.slider-prev, .slider-next {
+.slider-prev,
+.slider-next {
     position: absolute;
     top: 50%;
     transform: translateY(-50%);
@@ -305,9 +310,11 @@
 
 .slick-dots li button:before {
     font-size: 10px;
-    color: transparent; /* Set the base color to transparent */
-    background:linear-gradient(to right, #60a5fa, #a78bfa, #f472b6);
-    border-radius: 50%; /* Make it circular */
+    color: transparent;
+    /* Set the base color to transparent */
+    background: linear-gradient(to right, #60a5fa, #a78bfa, #f472b6);
+    border-radius: 50%;
+    /* Make it circular */
     width: 12px !important;
     height: 12px !important;
     content: '';
@@ -316,20 +323,23 @@
 }
 
 .slick-dots li.slick-active button:before {
-    background: linear-gradient(to right, #60a5fa, #a78bfa, #f472b6); /* Different gradient for the active dot */
-    opacity: 1; /* Make sure the active dot is fully opaque */
+    background: linear-gradient(to right, #60a5fa, #a78bfa, #f472b6);
+    /* Different gradient for the active dot */
+    opacity: 1;
+    /* Make sure the active dot is fully opaque */
 }
 
-.slick-dots{
+.slick-dots {
     bottom: -41px !important;
 }
 
 
 
-.about-clip-path{
+.about-clip-path {
     clip-path: ellipse(93% 100% at top);
 }
-.overlay-allbanner{
+
+.overlay-allbanner {
     position: absolute;
     left: 0;
     top: 0;
@@ -337,23 +347,80 @@
     width: 100%;
     height: 100%;
     right: 0;
-    background-image: linear-gradient(to right top, #2725b9d4, #3a39dcd1, #e748bec2, #e748bec9, #e748beb5) !important;
+    /* background-image: linear-gradient(to right top, #2725b9d4, #3a39dcd1, #e748bec2, #e748bec9, #e748beb5) !important; */
     /* background-image: linear-gradient(to right top, rgba(96, 165, 250, 0.7), rgba(167, 139, 250, 0.7), rgba(244, 114, 182, 0.7)) !important; */
-
+    background-color: rgba(0, 0, 0, 0.8); 
 }
 
 
 .service-carts:hover {
-    color: #fff; /* Changes the text color on hover */
+    color: #fff;
+    /* Changes the text color on hover */
+}
+
+.service-carts:hover h3 {
+    color: #fff;
+    /* Changes the SVG icon color on hover */
+
+}
+
+.service-carts:hover svg {
+    fill: #fff;
+    /* Changes the SVG icon color on hover */
+}
+
+
+.custom-scrollbar::-webkit-scrollbar {
+    width: 4px; /* Adjust the width as needed */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb {
+    background-color: #888; /* Scrollbar thumb color */
+    border-radius: 10px; /* Rounded corners */
+}
+
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+    background-color: #555; /* Scrollbar thumb hover color */
+}
+
+
+
+
+/* custom range  */
+.custom-range {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    margin-top: 0.5rem;
+    background-color: #4c4d50; /* Range background color */
+    border-radius: 10px; 
+    height: 8px;
+    margin-bottom: 15px;
   }
   
-  .service-carts:hover svg {
-    fill: #fff; /* Changes the SVG icon color on hover */
+  .custom-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    background-color: red; /* Thumb (Pointer) color */
+    width: 16px; /* Default width */
+    height: 16px; /* Default height */
+    border-radius: 50%; /* Rounded thumb */
+    cursor: pointer;
+  }
+  
+  .custom-range::-moz-range-thumb {
+    background-color: red; /* Thumb (Pointer) color */
+    width: 10px !important; /* Default width */
+    height: 16px; /* Default height */
+    border-radius: 50%; /* Rounded thumb */
+    cursor: pointer;
   }
 
 
 
 
+
+  
 
 .section-choose-background {
     background-image: url('/Images/choosebg.png');
