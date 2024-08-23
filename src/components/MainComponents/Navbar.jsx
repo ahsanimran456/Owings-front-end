@@ -9,7 +9,9 @@ function Navbar() {
         { name: 'Home', path: '/' },
         { name: 'About Us', path: '/aboutus' },
         { name: 'Services', path: '/services' },
-        { name: 'Contact Us', path: '/contactus' }
+        { name: 'Contact Us', path: '/contactus' },
+        { name: 'Login', path: '/login' },
+        { name: 'Sign Up', path: '/signup' }
     ];
     return (
         <header className='bg-[#162e40]'>

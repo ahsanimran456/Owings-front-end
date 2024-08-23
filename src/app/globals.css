@@ -349,7 +349,7 @@
     right: 0;
     /* background-image: linear-gradient(to right top, #2725b9d4, #3a39dcd1, #e748bec2, #e748bec9, #e748beb5) !important; */
     /* background-image: linear-gradient(to right top, rgba(96, 165, 250, 0.7), rgba(167, 139, 250, 0.7), rgba(244, 114, 182, 0.7)) !important; */
-    background-color: rgba(0, 0, 0, 0.8); 
+    background-color: rgba(0, 0, 0, 0.8);
 }
 
 
@@ -371,16 +371,20 @@
 
 
 .custom-scrollbar::-webkit-scrollbar {
-    width: 4px; /* Adjust the width as needed */
+    width: 4px;
+    /* Adjust the width as needed */
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb {
-    background-color: #888; /* Scrollbar thumb color */
-    border-radius: 10px; /* Rounded corners */
+    background-color: #888;
+    /* Scrollbar thumb color */
+    border-radius: 10px;
+    /* Rounded corners */
 }
 
 .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-    background-color: #555; /* Scrollbar thumb hover color */
+    background-color: #555;
+    /* Scrollbar thumb hover color */
 }
 
 
@@ -392,35 +396,67 @@
     appearance: none;
     width: 100%;
     margin-top: 0.5rem;
-    background-color: #4c4d50; /* Range background color */
-    border-radius: 10px; 
+    background-color: #4c4d50;
+    /* Range background color */
+    border-radius: 10px;
     height: 8px;
     margin-bottom: 15px;
-  }
-  
-  .custom-range::-webkit-slider-thumb {
+}
+
+.custom-range::-webkit-slider-thumb {
     -webkit-appearance: none;
     appearance: none;
-    background-color: red; /* Thumb (Pointer) color */
-    width: 16px; /* Default width */
-    height: 16px; /* Default height */
-    border-radius: 50%; /* Rounded thumb */
+    background-color: red;
+    /* Thumb (Pointer) color */
+    width: 16px;
+    /* Default width */
+    height: 16px;
+    /* Default height */
+    border-radius: 50%;
+    /* Rounded thumb */
     cursor: pointer;
-  }
-  
-  .custom-range::-moz-range-thumb {
-    background-color: red; /* Thumb (Pointer) color */
-    width: 10px !important; /* Default width */
-    height: 16px; /* Default height */
-    border-radius: 50%; /* Rounded thumb */
+}
+
+.custom-range::-moz-range-thumb {
+    background-color: red;
+    /* Thumb (Pointer) color */
+    width: 10px !important;
+    /* Default width */
+    height: 16px;
+    /* Default height */
+    border-radius: 50%;
+    /* Rounded thumb */
     cursor: pointer;
-  }
+}
+
+
+.header-custmizebtns {
+    background: linear-gradient(to right, #f87171, #ef4444, #dc2626) !important;
+    /* Equivalent to bg-gradient-to-r from-red-400 via-red-500 to-red-600 */
+    background-size: 200% auto;
+    /* For hover effect */
+    color: white;
+    /* Equivalent to text-white */
+    border-radius: 0.375rem;
+    /* Equivalent to rounded-md */
+    width: 64px;
+    text-align: center;
+    font-weight: 500;
+    padding: 0;
+    border-radius: 20px;
+    padding: 10px 2px;
+    font-size: 13px;
+}
+
+.header-links-a{
+    margin-left: 10px !important;
+}
+.header-links-a::before {
+    height: 0 !important;
+}
 
 
 
-
-
-  
 
 .section-choose-background {
     background-image: url('/Images/choosebg.png');

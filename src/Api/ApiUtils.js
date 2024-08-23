@@ -1,6 +1,7 @@
 // apiUtils.js
 import axios from "axios"; 
-const baseUrl = 'http://192.168.100.25/owings/'; // replace with your actual base URL 
+// const baseUrl = 'http://192.168.100.25/owings/'; // replace with your actual base URL 
+const baseUrl = 'http://owings.co/api/'; // replace with your actual base URL 
 
 // headers and token
 export const headers = () => {
@@ -95,7 +96,7 @@ export const HandleLoginSignUp = async (formData, url) => {
 // get all countries 
 export const getCountries = async () => {
   try {
-    const data = await get("api/get-countries");
+    const data = await get("get-countries");
     return { data, error: null };
   } catch (error) {
     return { data: null, error: error };
@@ -105,7 +106,7 @@ export const getCountries = async () => {
 // get cities 
 export const getCities = async (id) => {
   try {
-    const data = await get(`api/get-cities/${id}`);
+    const data = await get(`get-cities/${id}`);
     return { data, error: null };
   } catch (error) {
     return { data: null, error: error };
@@ -117,7 +118,7 @@ export const getCities = async (id) => {
 // Handle ResendOTP 
 export const ResendOTP = async (formData) => {
   try {
-    const data = await post("api/resend-otp", formData);
+    const data = await post("resend-otp", formData);
     return { data, error: null };
   } catch (error) {
     // console.error("Error in resend otp :", error);
@@ -128,7 +129,7 @@ export const ResendOTP = async (formData) => {
 // Handle HandleConfirmOPT 
 export const HandleConfirmOPT = async (formData) => {
   try {
-    const data = await post("api/verify-otp", formData);
+    const data = await post("verify-otp", formData);
     return { data, error: null };
   } catch (error) {
     // console.error("Error in resend otp :", error);
@@ -140,7 +141,7 @@ export const HandleConfirmOPT = async (formData) => {
 // Handle HandleForgetPassword 
 export const HandleForgetPassword = async (formData) => {
   try {
-    const data = await post("api/forgot-password", formData);
+    const data = await post("forgot-password", formData);
     return { data, error: null };
   } catch (error) {
     // console.error("Error in resend otp :", error);
@@ -151,7 +152,7 @@ export const HandleForgetPassword = async (formData) => {
 
 export const HandleSetPassword = async (formData) => {
   try {
-    const data = await post("api/reset-password", formData);
+    const data = await post("reset-password", formData);
     return { data, error: null };
   } catch (error) {
     // console.error("Error in resend otp :", error);

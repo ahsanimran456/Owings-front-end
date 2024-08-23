@@ -150,10 +150,15 @@ function CredentailForm({ title }) {
 
         if (title === "signup" && Type === "merchant") {
             images.forEach((image, index) => {
-                formDataToSend.append(`images[${index}]`, image);
+                formDataToSend.append(`images[${index}]`, {
+                    uri: image.uri || URL.createObjectURL(image),
+                    type: image.type,
+                    name: image.name
+                });
             });
+            
         }
-        const APIURL = title === "login" ? 'api/login' : 'api/register'
+        const APIURL = title === "login" ? 'login' : 'register'
         const { data, error } = await HandleLoginSignUp(formDataToSend, APIURL);
 
         if (data) {
@@ -178,7 +183,7 @@ function CredentailForm({ title }) {
             }
             toast.error(error?.response?.data?.error, {
                 position: "top-right",
-                duration:3000
+                duration: 3000
             });
             if (error?.response?.data?.error == "User account is not active") {
                 localStorage.setItem("email", FormValue["email"])
@@ -201,6 +206,11 @@ function CredentailForm({ title }) {
         console.log(error, "error response")
     };
 
+
+    useEffect(() => {
+        console.log(images);
+
+    }, [images]);
 
     const handleImageChange = (e) => {
         if (images?.length < 3) {
